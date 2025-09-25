@@ -24,6 +24,7 @@ class TestRoom(TestCase):
         self.assertIn("firebase_id", response.json())
         self.assertIn("user_id", response.json())
         self.assertEqual("this_is_id", response.json()["firebase_id"])
+        self.assert
 
     def test_incorrect_create_acc(self):
         data = {}
