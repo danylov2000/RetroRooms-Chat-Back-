@@ -7,3 +7,7 @@ class UserCreate(BaseModel):
 class UserCreateResponse(BaseModel):
     firebase_id: str
     user_id: int
+
+class RoomCreate(BaseModel):
+    room_name: str
+    author: str

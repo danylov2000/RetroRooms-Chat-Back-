@@ -19,5 +19,11 @@ def create_user(user: UserCreate):
     except IntegrityError:
         return JSONResponse(status_code=409, content={"message": "User already exists"})
 
+@router.get("/{firebase_id}", response_model=UserCreateResponse)
+def get_user_id(firebase_id: str):
+    user_object = session.query(User).filter(User.firebase_id == firebase_id).first()
+    if not user_object:
+        return JSONResponse(status_code=404, content={"message": "User doesn't exist"})
+    return {"firebase_id": user_object.firebase_id, "user_id": user_object.id}
 
 

@@ -4,11 +4,6 @@ from sqlalchemy.orm import  relationship, declarative_base
 
 Base = declarative_base()
 
-
-
-
-
-
 room_user = Table(
     'room_users',
     Base.metadata,
@@ -19,6 +14,7 @@ room_user = Table(
 class Room(Base):
     __tablename__ = 'rooms'
     id = Column(Integer, primary_key=True, autoincrement=True)
+    room_name = Column(String, unique=True, nullable=False)
     author = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.now())
     members = relationship("User", secondary=room_user, back_populates="rooms")
@@ -28,5 +24,5 @@ class Room(Base):
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    firebase_id = Column(String, unique=True, nullable=False, )
+    firebase_id = Column(String, unique=True, nullable=False)
     rooms = relationship("Room", secondary=room_user, back_populates="members")
